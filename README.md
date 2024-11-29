@@ -2,6 +2,10 @@
 
 A **User Management System** that provides secure authentication and role-based authorization for **Users** and **Admins**. This project ensures data protection, controlled access, and efficient workflows for different roles.
 
+
+https://github.com/user-attachments/assets/8b5811c5-2966-4fa6-a6b3-97a7440aac0a
+
+
 ---
 
 ## Project Assignment Details
