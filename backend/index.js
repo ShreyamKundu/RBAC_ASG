@@ -15,12 +15,12 @@ dotenv.config();
 import "./config/passport.js";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const __dirname = path.resolve();
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(cookieParser());
 
 app.use(
@@ -44,14 +44,10 @@ app.get("/", (req, res) => {
   res.send("Welcome to the RBAC system!");
 });
 
-// Static files for production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-  });
-}
+// 404 Not Found Middleware
+app.use((req, res, next) => {
+  res.status(404).json({ error: "Not Found" });
+});
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

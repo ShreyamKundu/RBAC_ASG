@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 axios.defaults.withCredentials = true;
 
@@ -59,7 +59,7 @@ export const useAuthStore = create((set) => ({
   logout: async () => {
     set({ isLoading: true, error: null });
     try {
-      await axios.post(`${API_URL}/logout`);
+      await axios.post(`${API_URL}/api/auth/logout`);
       set({
         user: null,
         isAuthenticated: false,
@@ -71,6 +71,7 @@ export const useAuthStore = create((set) => ({
       throw error;
     }
   },
+
   verifyEmail: async (code) => {
     set({ isLoading: true, error: null });
     try {
